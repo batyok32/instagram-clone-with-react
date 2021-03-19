@@ -1,0 +1,55 @@
+.app {
+  background-color: #fafafa;
+}
+
+.app__headerImage {
+  width: 120px;
+  object-fit: contain;
+  height: 150px;
+  max-width: 120px;
+  max-height: 150px;
+}
+
+.app__posts {
+  padding: 20px;
+}
+
+.app__header {
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  background-color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.app__signup {
+  display: flex;
+  /* text-align: center; */
+  width: 90%;
+  margin: 0 auto;
+  flex-direction: column;
+  border: none;
+}
+.input__field {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.makeStles-paper-1 {
+  border: none;
+}
+.app__posts {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 690px) {
+  .modalCustom {
+    width: 90% !important;
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <meta name="viewport" content="width-device-width, initial-scale=1.0"> 
+    <title>Instagram</title>
+    <style type="text/css">
+        .body {
+            height: 100%;
+            margin: 0;
+            background: #0a1f44;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .city {
+            align-items: center;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 40px 8%;
+            border-radius: 20px;
+            background: #fff;
+        }
+        .city-name{
+            font-size: 2em;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="city">
+          <div class="city-name">
+              <span>Please go online.</span>
+          </div>
+      </div>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('./serviceworker.js')
+                  .then((reg) => console.log("Success: ", reg.scope))
+                  .catch((err) => console.log("Failure: ", err));
+          })
+      }
+  </script>
+  </body>
+</html>

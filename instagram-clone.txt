@@ -1,0 +1,141 @@
+# instagram-clone
+
+npx create-react-app instagram-clone
+create fireabase app
+firebase database 
+create it 
+go to firestore
+create a table
+go to project settings
+go to config
+create fireabase.js
+paste everything
+# code
+===================================================
+import firebase from "firebase";
+
+const firebaseApp=firebase.initializeApp( {
+    apiKey: "AIzaSyD43yH3UMINxOjltfBtcC7WZBBCJ9OQdX4",
+    authDomain: "instagram-clone-837d2.firebaseapp.com",
+    databaseURL: "https://instagram-clone-837d2-default-rtdb.firebaseio.com",
+    projectId: "instagram-clone-837d2",
+    storageBucket: "instagram-clone-837d2.appspot.com",
+    messagingSenderId: "666954746933",
+    appId: "1:666954746933:web:4f34ab825e538ac09e757c",
+    measurementId: "G-YLPYVDW4PW"
+});
+
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+const storage = firebase.storage();
+
+export { db, auth, storage };
+
+const [posts, setPosts] = useState([])
+  useEffect(() => {
+    db.collection('posts').onSnapshot(snapshot => {
+      setPosts(snapshot.docs.map(doc => doc.data()))
+    })
+    // every time a new post is added this code fires
+  }, []);
+==========================================================
+npm i firebase
+
+go to firebase authentication 
+enable email authentication
+
+make two modals to login and sign up
+define useState functions for 
+const [posts, setPosts] = useState([])
+  const [open, setOpen] = useState(false)
+  const [openSignIn, setOpenSignIn] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [user, setUser] = useState(null)
+
+
+
+define two useEffect's for taking inf about posts
+and login
+
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    if (authUser) {
+      // user has logged in
+      console.log(authUser);
+      setUser(authUser);
+      
+    }else {
+      // user has logged out
+      setUser(null);
+    }
+  })
+
+  return () => {
+    // perform some clean up action
+    unsubscribe();
+  }
+}, [user, username])
+
+
+useEffect(() => {
+  db.collection('posts').onSnapshot(snapshot => {
+        // every time a new post is added this code fires
+    setPosts(snapshot.docs.map(doc => ({
+      id: doc.id,
+      post:doc.data()
+    }))); 
+  })
+}, []);
+
+
+define login and signup functions when we click button
+const signUp = (event) => {
+  event.preventDefault();
+  
+  auth
+  .createUserWithEmailAndPassword(email, password)
+  .then((authUser) => {
+    return authUser.user.updateProfile({
+      displayName: username
+    })
+  })
+  .catch((error) => alert(error.message))
+  setOpen(false)
+  alert("SUCCESFULLY SIGN UP", username)
+}
+
+const signIn = (event) => {
+  event.preventDefault();
+
+  auth
+  .signInWithEmailAndPassword(email, password)
+  .catch((error) => alert(error.message))
+  setOpenSignIn(false)
+  alert("SUCCESFULLY SIGN IN", username)
+}
+
+<Button variant="contained" color="primary" type="submit" onClick={signUp}>Sign up</Button>
+
+
+make thing like this for buttons 
+{user ? (
+  <Button variant="contained" color="primary" onClick={() => {auth.signOut()}}>Log out</Button>
+) : (
+  <div className="app__loginContainer">
+    <Button variant="contained" color="primary" onClick={() => {setOpenSignIn(true)}}>Sign in</Button>
+    <Button variant="contained" color="primary" onClick={() => {setOpen(true)}}>Sign up</Button>
+  </div>
+  
+)}
+
+storing posts in fireabase
+
+
+use lazy import
+pwa asset generator
+offline.html
+manifest.json
+serviceWorker.js
+index.html >>> 
